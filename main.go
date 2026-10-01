@@ -144,7 +144,8 @@ Usage:
   ghsync clone <account> --dir <folder> [filters] [backup] [options]
   ghsync update [<account> | --all] [options]
   ghsync list
-  ghsync version
+  ghsync version | --version | -v
+  ghsync help    | --help    | -h       (also after any command)
 
 Filters (saved per account, reused by update):
   --contains a,b       name contains any substring
@@ -181,6 +182,17 @@ func main() {
 }
 
 func run(args []string) int {
+	// --help / --version work anywhere on the line, including after a command.
+	for _, a := range args {
+		switch a {
+		case "-h", "--help", "-help":
+			fmt.Print(usage)
+			return 0
+		case "-v", "--version", "-version":
+			fmt.Println("ghsync", version)
+			return 0
+		}
+	}
 	cmd := "menu"
 	if len(args) > 0 {
 		cmd, args = args[0], args[1:]
@@ -194,10 +206,10 @@ func run(args []string) int {
 		return cmdList(args)
 	case "menu":
 		return menu()
-	case "version", "--version":
+	case "version":
 		fmt.Println("ghsync", version)
 		return 0
-	case "help", "-h", "--help":
+	case "help":
 		fmt.Print(usage)
 		return 0
 	}

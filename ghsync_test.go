@@ -56,6 +56,18 @@ func TestFilter(t *testing.T) {
 	}
 }
 
+func TestHelpAndVersion(t *testing.T) {
+	for _, args := range [][]string{{"--help"}, {"-h"}, {"help"}, {"--version"}, {"-v"}, {"version"},
+		{"clone", "--help"}, {"update", "-h"}, {"list", "--version"}, {"clone", "x", "--dir", "y", "-v"}} {
+		if code := run(args); code != 0 {
+			t.Errorf("%v: exit %d", args, code)
+		}
+	}
+	if code := run([]string{"bogus"}); code != 2 {
+		t.Errorf("unknown command: exit %d", code)
+	}
+}
+
 func TestReason(t *testing.T) {
 	cases := map[string]string{
 		"error: unable to create file x: Filename too long":                  "path too long",
