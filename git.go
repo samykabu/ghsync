@@ -218,7 +218,7 @@ func (r runner) syncRepo(it item, noUpdate, dry bool) Row {
 	return row("updated", fmt.Sprintf("%d new commit(s)", behind))
 }
 
-var notFoundRx = regexp.MustCompile(`(?i)not found|does not appear to be a git repository`)
+var notFoundRx = regexp.MustCompile(`(?i)not found|does not appear to be a git repository|does not exist`)
 
 // syncBackup keeps a `git clone --mirror` (all branches and tags) of a repo, and optionally its wiki.
 func (r runner) syncBackup(it item, dry bool) Row {
