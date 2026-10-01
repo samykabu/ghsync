@@ -30,6 +30,33 @@ scoops:
     license: MIT
     depends: [git]
 
+# winget install samykabu.ghsync
+# Pushes manifests to the samykabu/winget-pkgs fork, then opens a PR to microsoft/winget-pkgs.
+winget:
+  - name: ghsync
+    package_identifier: samykabu.ghsync
+    publisher: samykabu
+    publisher_url: https://github.com/samykabu
+    short_description: Clone, update and back up every repo of GitHub accounts.
+    homepage: https://github.com/samykabu/ghsync
+    license: MIT
+    license_url: https://github.com/samykabu/ghsync/blob/main/LICENSE
+    release_notes_url: https://github.com/samykabu/ghsync/releases/tag/{{ .Tag }}
+    tags: [git, github, backup, cli]
+    dependencies:
+      - package_identifier: Git.Git
+    repository:
+      owner: samykabu
+      name: winget-pkgs
+      branch: "ghsync-{{ .Version }}"
+      token: "{{ .Env.WINGET_GITHUB_TOKEN }}"
+      pull_request:
+        enabled: true
+        base:
+          owner: microsoft
+          name: winget-pkgs
+          branch: master
+
 # brew install --cask samykabu/tap/ghsync
 homebrew_casks:
   - repository:
