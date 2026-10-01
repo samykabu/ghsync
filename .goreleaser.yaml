@@ -30,12 +30,13 @@ scoops:
     license: MIT
     depends: [git]
 
-# winget install samykabu.ghsync
+# winget install sabushanab.ghsync
 # Pushes manifests to the samykabu/winget-pkgs fork, then opens a PR to microsoft/winget-pkgs.
 winget:
   - name: ghsync
-    package_identifier: samykabu.ghsync
-    publisher: samykabu
+    package_identifier: sabushanab.ghsync
+    publisher: Samy K. Abushanab
+    path: manifests/s/sabushanab/ghsync/{{ .Version }}
     publisher_url: https://github.com/samykabu
     short_description: Clone, update and back up every repo of GitHub accounts.
     homepage: https://github.com/samykabu/ghsync

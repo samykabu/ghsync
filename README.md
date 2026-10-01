@@ -6,7 +6,7 @@ what lives where, and get a report of what happened (and why anything failed).
 ## Install
 
 ```sh
-winget install samykabu.ghsync                                                              # Windows
+winget install sabushanab.ghsync                                                              # Windows
 scoop bucket add samykabu https://github.com/samykabu/scoop-bucket && scoop install ghsync   # Windows
 brew install --cask samykabu/tap/ghsync                                                     # macOS / Linux
 go install github.com/samykabu/ghsync@latest                                                 # anywhere with Go
@@ -99,8 +99,8 @@ Then check:
 - https://github.com/samykabu/ghsync/releases has the archives and `checksums.txt`
 - `scoop update; scoop install ghsync` (or `scoop update ghsync`) on Windows
 - `brew update && brew install --cask samykabu/tap/ghsync` (or `brew upgrade --cask ghsync`) on macOS/Linux
-- the winget PR at https://github.com/microsoft/winget-pkgs/pulls?q=samykabu.ghsync; once merged,
-  `winget install samykabu.ghsync` (or `winget upgrade samykabu.ghsync`)
+- the winget PR at https://github.com/microsoft/winget-pkgs/pulls?q=sabushanab.ghsync; once merged,
+  `winget install sabushanab.ghsync` (or `winget upgrade sabushanab.ghsync`)
 
 A failed release can be retried: fix the problem, delete the tag
 (`git push --delete origin v0.1.0; git tag -d v0.1.0`) and the draft/partial release on GitHub, then tag again.
