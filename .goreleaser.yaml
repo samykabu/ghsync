@@ -1,0 +1,50 @@
+version: 2
+project_name: ghsync
+
+builds:
+  - env: [CGO_ENABLED=0]
+    goos: [windows, darwin, linux]
+    goarch: [amd64, arm64]
+    ldflags: -s -w -X main.version={{ .Version }}
+
+archives:
+  - formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: checksums.txt
+
+changelog:
+  sort: asc
+
+# scoop bucket add samykabu https://github.com/samykabu/scoop-bucket && scoop install ghsync
+scoops:
+  - repository:
+      owner: samykabu
+      name: scoop-bucket
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+    homepage: https://github.com/samykabu/ghsync
+    description: Clone, update and back up every repo of GitHub accounts.
+    license: MIT
+    depends: [git]
+
+# brew install --cask samykabu/tap/ghsync
+homebrew_casks:
+  - repository:
+      owner: samykabu
+      name: homebrew-tap
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+    homepage: https://github.com/samykabu/ghsync
+    description: Clone, update and back up every repo of GitHub accounts.
+    license: MIT
+    dependencies:
+      - formula: git
+    hooks:
+      post:
+        # unsigned binary: drop the download quarantine flag so macOS will run it
+        install: |
+          if OS.mac?
+            system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/ghsync"]
+          end
