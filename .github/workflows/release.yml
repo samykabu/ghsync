@@ -6,7 +6,7 @@ permissions:
   contents: write
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: homek8-general
     steps:
       - uses: actions/checkout@v4
         with:
