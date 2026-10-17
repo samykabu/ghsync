@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os != 'ubuntu-latest' && matrix.os || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository) && 'ubuntu-latest' || 'homek8-general' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
