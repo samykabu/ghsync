@@ -8,12 +8,6 @@ ghsync keeps a local copy of every repository a GitHub user or organization owns
 
 It ships as one binary for Windows, macOS and Linux, and the only thing it needs on your machine is git.
 
-> $${\color{red}\text{CI runner exception: every job runs on the home office runner homek8-general except two cases. The windows-latest and macos-latest legs of the test matrix in .github/workflows/ci.yml run on GitHub-hosted Windows and macOS, and the ci.yml job of a pull request from a fork runs on ubuntu-latest.}}$$
->
-> $${\color{red}\text{Why: Windows and macOS legs: the home office runners are Linux pods, and the tests must run on each platform ghsync ships for. Fork pull requests: this repository is public, and code from a fork must not run inside the home office cluster, so jobs of pull requests from forks run on ubuntu-latest.}}$$
->
-> $${\color{red}\text{Removal: Windows and macOS legs: register self-hosted Windows and macOS runners for samykabu/ghsync and point those legs at them. Fork pull requests: none planned; this exception is a security boundary, not a missing runner.}}$$
-
 ## Contents
 
 * [Features](#features)
