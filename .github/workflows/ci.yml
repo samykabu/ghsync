@@ -17,3 +17,9 @@ jobs:
           go-version-file: go.mod
       - run: go vet ./...
       - run: go test ./...
+      - uses: goreleaser/goreleaser-action@v6
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          distribution: goreleaser
+          version: 'v2.20.0-2e260e4a-nightly'
+          args: check

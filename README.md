@@ -251,6 +251,8 @@ When you report a bug, include the ghsync version, your operating system, the co
 
 This section is for maintainers. Pushing a tag such as `v0.1.3` starts the release workflow. It runs the tests and builds binaries for Windows, macOS and Linux on amd64 and arm64. Then it publishes a GitHub release, updates the Scoop bucket and the Homebrew tap, and opens a pull request to the winget catalog.
 
+CI also checks the GoReleaser configuration. CI and releases temporarily pin `v2.20.0-2e260e4a-nightly`, which includes the WinGet manifest schema `1.28.0` fix; stable `v2.19.0` still generates the deprecated `1.12.0` schema. Update both workflow pins to a stable release containing [the upstream fix](https://github.com/goreleaser/goreleaser/commit/2e260e4af35c00e0ad41e479c3830f9cfe858e36) when available. Existing open WinGet PRs do not refresh automatically and must be updated on their submission branch.
+
 ```sh
 git tag v0.1.3
 git push origin v0.1.3
@@ -273,7 +275,7 @@ gh secret set WINGET_GITHUB_TOKEN -R samykabu/ghsync
 When one of the tokens expires, only the step that uses it fails, and the GitHub release still goes out. To retry a failed release, delete the tag and the release on GitHub, fix the problem, and push the tag again. To try a release locally without publishing anything, run:
 
 ```sh
-go run github.com/goreleaser/goreleaser/v2@latest release --snapshot --clean
+go run github.com/goreleaser/goreleaser/v2@v2.20.0-2e260e4a-nightly release --snapshot --clean
 ```
 
 ## License

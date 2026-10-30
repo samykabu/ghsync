@@ -18,7 +18,8 @@ jobs:
       - uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
-          version: '~> v2'
+          # shortcut: pin the 1.28.0 schema fix until it ships in a stable release.
+          version: 'v2.20.0-2e260e4a-nightly'
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
